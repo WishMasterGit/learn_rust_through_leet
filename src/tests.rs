@@ -91,4 +91,30 @@ mod excercise_tests {
         assert_eq!(roman_to_int_v2("MCMXCIV".to_string()).data, 1994);
         assert_eq!(roman_to_int_v2("MMMCMXCIX".to_string()).data, 3999);
     }
+    #[test]
+    fn test_longest_common_prefix() {
+        assert_eq!(
+            longest_common_prefix(vec![
+                "flower".to_string(),
+                "flow".to_string(),
+                "flight".to_string()
+            ])
+            .data,
+            "fl"
+        );
+        assert_eq!(
+            longest_common_prefix(vec![
+                "dog".to_string(),
+                "racecar".to_string(),
+                "car".to_string()
+            ])
+            .data,
+            ""
+        );
+        assert_eq!(
+            longest_common_prefix(vec!["aca".to_string(), "cba".to_string()]).data,
+            ""
+        );
+        assert_eq!(longest_common_prefix(vec!["a".to_string()]).data, "a");
+    }
 }

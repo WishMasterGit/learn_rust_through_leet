@@ -28,7 +28,7 @@ pub fn is_palindrome(mut number: i32) -> Result<bool> {
     if number == reverted_number || number == reverted_number / 10 {
         return Result::success(true);
     };
-    return Result::fail();
+    Result::fail()
 }
 
 pub fn roman_to_int(roman_number: String) -> Result<i32> {
@@ -67,6 +67,7 @@ pub fn roman_to_int(roman_number: String) -> Result<i32> {
     Result::success(output)
 }
 
+// roman_to_int_v2 is a more efficient version of roman_to_int
 pub fn roman_to_int_v2(roman_number: String) -> Result<i32> {
     let mut output = 0;
     let mut prev_increment = 0;
@@ -92,13 +93,55 @@ pub fn roman_to_int_v2(roman_number: String) -> Result<i32> {
 }
 
 pub fn longest_common_prefix(words: Vec<String>) -> Result<String> {
-    let mut max_len = 300;
-    let mut ouptut = "";
-    for str in words {
-        if max_len > str.len() {
-            max_len = str.len()
+    let mut min_word_len = 300;
+    let mut ouptut: String = String::new();
+    for str in words.iter() {
+        if min_word_len > str.len() {
+            min_word_len = str.len()
         }
     }
+    for i in 0..min_word_len {
+        let mut current_char = ' ';
+        let mut counter = 0;
+        for word in words.iter() {
+            if current_char == ' ' {
+                current_char = word.chars().nth(i).unwrap();
+                counter += 1;
+            } else if current_char == word.chars().nth(i).unwrap() {
+                counter += 1;
+            } else if current_char != word.chars().nth(i).unwrap() {
+                if !ouptut.is_empty() {
+                    return Result::success(ouptut);
+                }
+                return Result::fail();
+            }
+        }
+        if counter == words.len() {
+            ouptut.push(current_char);
+        }
+    }
+    if !ouptut.is_empty() {
+        return Result::success(ouptut);
+    }
+    Result::fail()
+}
 
+pub fn longest_common_prefix_v2(words: Vec<String>) -> Result<String> {
+    let min_word_len = words.iter().map(|w| w.len()).min().unwrap();
+    let mut output = String::new();
+    for i in 0..min_word_len {
+        let current_char = words[0].chars().nth(i).unwrap();
+        if words
+            .iter()
+            .all(|word| word.chars().nth(i).unwrap() == current_char)
+        {
+            output.push(current_char);
+        } else {
+            break;
+        }
+    }
+    if !output.is_empty() {
+        return Result::success(output);
+    }
     Result::fail()
 }
