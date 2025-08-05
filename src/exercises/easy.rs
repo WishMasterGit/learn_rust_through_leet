@@ -145,3 +145,42 @@ pub fn longest_common_prefix_v2(words: Vec<String>) -> Result<String> {
     }
     Result::fail()
 }
+
+pub fn is_valid_parentheses(s: String) -> bool {
+    let close_dict = HashMap::from([('(', ')'), ('[', ']'), ('{', '}')]);
+    let mut validator = Vec::new();
+    for c in s.chars() {
+        if close_dict.contains_key(&c) {
+            validator.push(close_dict[&c]);
+        } else {
+            let closing = validator.pop().unwrap();
+            if closing == c {
+                continue;
+            } else {
+                return false;
+            }
+        }
+    }
+    if validator.is_empty() {
+        return true;
+    }
+    false
+}
+
+pub fn is_valid_parentheses_v2(s: String) -> bool {
+    let close_dict = HashMap::from([(')', '('), (']', '['), ('}', '{')]);
+    let mut validator = Vec::new();
+    for c in s.chars() {
+        if close_dict.contains_key(&c) {
+            if validator.is_empty() || validator.pop().unwrap() != close_dict[&c] {
+                return false;
+            }
+        } else {
+            validator.push(c);
+        }
+    }
+    if validator.is_empty() {
+        return true;
+    }
+    false
+}

@@ -117,4 +117,20 @@ mod excercise_tests {
         );
         assert_eq!(longest_common_prefix(vec!["a".to_string()]).data, "a");
     }
+    #[test]
+    fn test_is_valid_parentheses() {
+        assert!(is_valid_parentheses("()".to_string()));
+        assert!(is_valid_parentheses("()[]{}".to_string()));
+        assert!(!is_valid_parentheses("(]".to_string()));
+        assert!(!is_valid_parentheses("([)]".to_string()));
+        assert!(is_valid_parentheses("{[]}".to_string()));
+    }
+    #[test]
+    fn test_is_valid_parentheses_v2() {
+        assert!(is_valid_parentheses_v2("()".to_string()));
+        assert!(is_valid_parentheses_v2("()[]{}".to_string()));
+        assert!(!is_valid_parentheses_v2("(]".to_string()));
+        assert!(!is_valid_parentheses_v2("([)]".to_string()));
+        assert!(is_valid_parentheses_v2("{[]}".to_string()));
+    }
 }
