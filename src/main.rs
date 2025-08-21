@@ -1,4 +1,5 @@
 mod exercises;
+mod rabinkarp;
 mod tests;
 mod util;
 

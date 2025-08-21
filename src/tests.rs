@@ -133,4 +133,39 @@ mod excercise_tests {
         assert!(!is_valid_parentheses_v2("([)]".to_string()));
         assert!(is_valid_parentheses_v2("{[]}".to_string()));
     }
+    #[test]
+    fn test_remove_duplicates() {
+        assert_eq!(remove_duplicates(&mut vec![1, 1, 2]), 2);
+        assert_eq!(
+            remove_duplicates(&mut vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4]),
+            5
+        );
+    }
+    #[test]
+    fn test_remove_duplicates_v2() {
+        let mut nums = vec![1, 1, 2];
+        assert_eq!(remove_duplicates_v2(&mut nums), 2);
+        assert_eq!(nums, vec![1, 2]);
+        assert_eq!(
+            remove_duplicates_v2(&mut vec![0, 0, 1, 1, 1, 2, 2, 3, 3, 4]),
+            5
+        );
+    }
+    #[test]
+    fn test_remove_element() {
+        assert_eq!(remove_element(&mut vec![4, 5], 5), 1);
+        assert_eq!(remove_element(&mut vec![1], 1), 0);
+        assert_eq!(remove_element(&mut vec![3, 1, 1, 2], 3), 3);
+        let mut arr = vec![0, 1, 2, 2, 3, 0, 4, 2];
+        assert_eq!(remove_element(&mut arr, 2), 5);
+        assert_eq!(arr, vec![0, 1, 4, 0, 3]);
+    }
+    #[test]
+    fn test_str_strv2() {
+        assert_eq!(str_str2("a".to_string(), "a".to_string()), 0);
+    }
+    #[test]
+    fn test_str_strv3() {
+        assert_eq!(str_str_v3("a".to_string(), "a".to_string()), 0);
+    }
 }

@@ -1,4 +1,4 @@
-use crate::util::*;
+use crate::{rabinkarp::search_for_pattern, util::*};
 use std::collections::HashMap;
 pub fn two_sum(nums: Vec<i32>, target: i32) -> Result<Vec<i32>> {
     let mut map: HashMap<i32, i32> = HashMap::new();
@@ -183,4 +183,70 @@ pub fn is_valid_parentheses_v2(s: String) -> bool {
         return true;
     }
     false
+}
+
+pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+    nums.dedup_by(|a, b| a == b);
+    nums.len() as i32
+}
+
+pub fn remove_duplicates_v2(nums: &mut Vec<i32>) -> i32 {
+    let mut pointer = 0;
+    for i in 0..nums.len() {
+        if nums[pointer] != nums[i] {
+            pointer += 1;
+            nums[pointer] = nums[i];
+        }
+    }
+    pointer += 1;
+    nums.resize_with(pointer, Default::default);
+    pointer as i32
+}
+
+pub fn remove_element(nums: &mut Vec<i32>, val: i32) -> i32 {
+    let mut i = 0;
+    let mut n = nums.len();
+    while i < n {
+        if nums[i] == val {
+            nums.swap_remove(i);
+            n -= 1;
+        } else {
+            i += 1;
+        }
+    }
+    nums.len() as i32
+}
+pub fn str_str(haystack: String, needle: String) -> i32 {
+    match haystack.find(&needle) {
+        Some(val) => val as i32,
+        _ => -1,
+    }
+}
+
+pub fn str_str2(haystack: String, needle: String) -> i32 {
+    let mut index: i32 = -1;
+    let needle_len = needle.chars().count();
+    let haystack_len = haystack.chars().count();
+    for mut i in 0..haystack_len {
+        if needle.chars().nth(0) == haystack.chars().nth(i) && i + needle_len <= haystack_len {
+            index = i as i32;
+            for c in needle.chars() {
+                if haystack.chars().nth(i).unwrap() == c {
+                    i += 1;
+                } else {
+                    i = index as usize;
+                    index = -1;
+                    break;
+                }
+            }
+            if index != -1 {
+                return index;
+            }
+        }
+        continue;
+    }
+    index
+}
+pub fn str_str_v3(haystack: String, needle: String) -> i32 {
+    search_for_pattern(haystack, needle)[0]
 }
