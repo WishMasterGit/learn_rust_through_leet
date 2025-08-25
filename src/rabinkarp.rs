@@ -8,16 +8,13 @@ pub struct RabinKarpHash {
 impl RabinKarpHash {
     pub fn new(s: String) -> Self {
         let n = s.len();
+        let chars = s.chars().collect::<Vec<char>>();
         let mut hash = vec![0; n];
         let mut power = vec![0; n];
-        hash[0] = char_to_int(s.chars().nth(0).unwrap());
+        hash[0] = char_to_int(chars[0]);
         power[0] = 1;
         for i in 1..n {
-            let o = s.chars().nth(i);
-            hash[i] = add(
-                mul(hash[i - 1], BASE),
-                char_to_int(s.chars().nth(i).unwrap()),
-            );
+            hash[i] = add(mul(hash[i - 1], BASE), char_to_int(chars[i]));
             power[i] = mul(power[i - 1], BASE)
         }
         RabinKarpHash { hash, power }
