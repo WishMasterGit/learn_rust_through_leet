@@ -166,6 +166,9 @@ mod excercise_tests {
     }
     #[test]
     fn test_str_strv3() {
-        assert_eq!(str_str_v3("a".to_string(), "a".to_string()), 0);
+        assert_eq!(
+            str_str_v3("goodaftermath".to_string(), "after".to_string()),
+            4
+        );
     }
 }
